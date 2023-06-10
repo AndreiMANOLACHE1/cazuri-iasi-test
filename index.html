@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="./resources/ol.css">
+        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+        <link rel="stylesheet" href="./resources/qgis2web.css">
+        <style>
+        .ol-geocoder.gcd-gl-container {
+            top: 135px!important;
+            left: .5em!important;
+            width: 2.1em!important;
+            height: 2.1em!important;
+        }
+        .ol-geocoder .gcd-gl-container{
+            width: 2.1em!important;
+            height: 2.1em!important;
+        }
+        .ol-geocoder .gcd-gl-control{
+            width: 2.1em!important;
+        }
+        .ol-geocoder .gcd-gl-expanded {
+            width: 15.625em!important;
+            height: 2.1875em;
+        }
+        .ol-touch .ol-geocoder.gcd-gl-container{
+            top: 180px!important;
+        }
+        .ol-geocoder .gcd-gl-btn {
+            width: 1.375em!important;
+            height: 1.375em!important;
+            top: .225em!important;
+            background-image: none!important;
+        }
+        </style>
+<style>
+.search-layer {
+  top: 170px;
+  left: .5em;
+}
+.ol-touch .search-layer {
+  top: 230px;
+}
+</style>
+        <style>
+        html, body {
+            background-color: #ffffff;
+        }
+        .ol-control button {
+            background-color: #9b9b9b !important;
+            color: #000000 !important;
+            border-radius: 0px !important;
+        }
+        .ol-zoom, .geolocate, .gcd-gl-control .ol-control {
+            background-color: rgba(255,255,255,.4) !important;
+            padding: 3px !important;
+        }
+        .ol-scale-line {
+            background: none !important;
+        }
+        .ol-scale-line-inner {
+            border: 2px solid #9b9b9b !important;
+            border-top: none !important;
+            background: rgba(255, 255, 255, 0.5) !important;
+            color: black !important;
+        }
+        </style>
+
+        <style>
+        .geolocate {
+            top: 65px;
+            left: .5em;
+        }
+        .ol-touch .geolocate {
+            top: 80px;
+        }
+        </style>
+        <link href="resources/ol-geocoder.min.css" rel="stylesheet">
+<style>
+.tooltip {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  color: white;
+  padding: 4px 8px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+.tooltip-measure {
+  opacity: 1;
+  font-weight: bold;
+}
+.tooltip-static {
+  background-color: #ffcc33;
+  color: black;
+  border: 1px solid white;
+}
+.tooltip-measure:before,
+.tooltip-static:before {
+  border-top: 6px solid rgba(0, 0, 0, 0.5);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  margin-left: -7px;
+  left: 50%;
+}
+.tooltip-static:before {
+  border-top-color: #ffcc33;
+}
+.measure-control {
+  top: 100px;
+  left: .5em;
+}
+.ol-touch .measure-control {
+  top: 130px;
+}
+</style>
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+        </div>
+        <script src="resources/qgis2web_expressions.js"></script>
+<script src="resources/proj4.js"></script>
+        <script>proj4.defs('EPSG:4326','+proj=longlat +datum=WGS84 +no_defs');</script>
+        <script src="resources/polyfills.js"></script>
+        <script src="./resources/functions.js"></script>
+        <script src="./resources/ol.js"></script>
+        <script src="./resources/ol-layerswitcher.js"></script>
+        <script src="resources/ol-geocoder.js"></script>
+        <script src="layers/Iasi_1.js"></script><script src="layers/Transportul_pacient_pentru_monitorizare_la_spital_in_urma_consult_ECU_2.js"></script><script src="layers/Transportul_medicului_dus_intors_pentru_constatare_deces_3.js"></script><script src="layers/Transportul_copiilor_dializati_4.js"></script><script src="layers/Transport_pacienti_internati_transferati_la_alt_spital_5.js"></script><script src="layers/Transport_pacient_cu_talasemie_majora_6.js"></script><script src="layers/Transport_la_spital_pentru_internare_sau_investigatii_nedeplasabili_7.js"></script><script src="layers/Transport_la_spital_pentru_internare_investigatii_a_pers_cu_insuf_motorie_a_trenului_inf_8.js"></script><script src="layers/Transport_la_sp_pt_internare__investigatii_la_insuf_cardiaca_cls_IV_NIHA_9.js"></script><script src="layers/Transport_de_sange_si_derivate_in_conditii_de_urgenta_10.js"></script><script src="layers/Transport_de_sange__derivate__tesuturi_si_organe_11.js"></script><script src="layers/T_12.js"></script><script src="layers/Internare_nou_nascut_si_lehuza_de_la_domiciliu_13.js"></script><script src="layers/Extern_nedepl_decont_de_CNAS__fract_membr_inf_ap_gipsat__deficit_neurog_grav__14.js"></script><script src="layers/Plecat_cu_alt_mijloc_de_transport_15.js"></script><script src="layers/Pacientul_refuza_consultatia_si_transportul_la_spital_16.js"></script><script src="layers/Negasite_Nu_s_a_gasit_adresa_Solicitantul_pacientul_17.js"></script><script src="layers/Gripa_cu_virus_neidentificat_18.js"></script><script src="layers/FALSE_19.js"></script><script src="layers/Anulate_20.js"></script><script src="layers/Altele_decat_cele_decontate_de_CASS__efectuate_contracost_spre_terti__21.js"></script><script src="layers/Tromboflebita_acuta_22.js"></script><script src="layers/Stare_febrila_cu_alterarea_starii_generale_23.js"></script><script src="layers/Sindromul_subocluziv_24.js"></script><script src="layers/Sindroame_de_compresie_si_sau_iritatie_radiculara_in_faza_acuta_25.js"></script><script src="layers/Reumatismul_articular_acut_in_criza_26.js"></script><script src="layers/Retentia_urinara_27.js"></script><script src="layers/Primipara_contractii_uterine_dureroase_sarcina_luna_VII_cu_CUD_28.js"></script><script src="layers/Politraumatisme_minore_29.js"></script><script src="layers/Nevralgia_cervico_brahiala_30.js"></script><script src="layers/Meningita_la_adulti__holera__difteria__tetanus__botulism__boala_renala_cu_stare_gen_alterata_31.js"></script><script src="layers/Meningita_la_adulti_32.js"></script><script src="layers/Luxatii_33.js"></script><script src="layers/Lombalgia__lombosciatica_34.js"></script><script src="layers/Ischemie_cerebrala_tranzitorie_35.js"></script><script src="layers/Insuficienta_cardiaca_decompensata_36.js"></script><script src="layers/In_puseu_inflamator_37.js"></script><script src="layers/Herniile_strangulate_fara_abdomen_acut_38.js"></script><script src="layers/Hemoragii_interne_exteriorizate__fara_semne_de_soc_hipovolemic_39.js"></script><script src="layers/Fracturi_inchise_ale_membrelor_si_fara_leziuni_ale_pachetului_vasculonervos_40.js"></script><script src="layers/Entorse_41.js"></script><script src="layers/Diabet_decompensat_42.js"></script><script src="layers/Cu_deficit_motor_al_membrelor_inferioare_43.js"></script><script src="layers/Criza_hipertensiune_arteriala_fara_complicatii_44.js"></script><script src="layers/Corpi_straini_in_nas_fara_dispnee_la_copii_45.js"></script><script src="layers/Corpi_straini_in_nas__faringe_si_intraauricular_46.js"></script><script src="layers/Corpi_straini_in_faringe__fara_dispnee_la_copii_47.js"></script><script src="layers/Corpi_straini_auricular_la_copii___3_ani_48.js"></script><script src="layers/Colica_renala_49.js"></script><script src="layers/Colica_biliara_50.js"></script><script src="layers/Colica_abdominala_51.js"></script><script src="layers/Colica_52.js"></script><script src="layers/Ciroza_hepatica_decompensata_53.js"></script><script src="layers/Boala_diuretica_cu_stare_generala_alterata_54.js"></script><script src="layers/Avort_necomplicat_55.js"></script><script src="layers/Artrite_septice_56.js"></script><script src="layers/Arterita__fara_sindrom_ischemie_periferica_acuta__cu_confirmare_oscilometrica_57.js"></script><script src="layers/Arsuri_termice_de_grad_1_2_sub_10__din_suprafata_corpului_care_fac_imposibila_deplasarea_58.js"></script><script src="layers/Apendicita_acuta_fara_abdomen_acut_59.js"></script><script src="layers/Anuria_60.js"></script><script src="layers/Angina_pectorala__in_afara_de_angina_instabila__61.js"></script><script src="layers/Agitatii_psihomotori_sau_catatonicii_62.js"></script><script src="layers/Afectiuni_reumatologice_63.js"></script><script src="layers/Tulburari_paroxistice_de_ritm_64.js"></script><script src="layers/Tulb_de_conducere_cu_afectarea_functiei_de_pompa_65.js"></script><script src="layers/Traumatismele_toracice_cu_pneumotorax_cu_presiune_sau_tamponada_66.js"></script><script src="layers/Traumatismele_gatului_cu_interesarea_cailor_aeriene_superioare_67.js"></script><script src="layers/Traumatisme_fractura_coloana_vertebrala_68.js"></script><script src="layers/Traumatisme_faciale_cu_interesarea_globului_ocular_69.js"></script><script src="layers/Traumatisme_faciale_cu_interesarea_cailor_aeriene_superioare_70.js"></script><script src="layers/Traumatisme_cu_abdomen_acut_si_sau_soc_hipovolemic_71.js"></script><script src="layers/Traumatisme_abdominale_cu_afectarea_organelor_abdominale_72.js"></script><script src="layers/Traumatic_73.js"></script><script src="layers/Toxico_septic_74.js"></script><script src="layers/Tentative_de_suicid_75.js"></script><script src="layers/T_76.js"></script><script src="layers/Supradoze_droguri_77.js"></script><script src="layers/Stop_cardiorespirator_78.js"></script><script src="layers/Starile_febrile_la_nounascut__sugar_si_copil_mic_79.js"></script><script src="layers/Stari_halucinante_delirante_80.js"></script><script src="layers/Stari_depresive_severe_81.js"></script><script src="layers/Stari_de_inconstienta_82.js"></script><script src="layers/Stari_confuzionale_83.js"></script><script src="layers/Stare_stuporoasa_84.js"></script><script src="layers/Solicitare_pt_cazuri_preluate_din_locuri_publice_85.js"></script><script src="layers/Socul_hipotermic_86.js"></script><script src="layers/Sindromul_de_coagulare_intravasculara_diseminata_87.js"></script><script src="layers/Sincope_88.js"></script><script src="layers/Septicemie_89.js"></script><script src="layers/Sarcina_L_VII_contractii_uterine_dureroase_90.js"></script><script src="layers/Sarcina_ectopica_rupta_91.js"></script><script src="layers/Rectoragie_92.js"></script><script src="layers/Politraumatisme___Accidente_auto_93.js"></script><script src="layers/Pleurezii_cu_lichid_masiv_94.js"></script><script src="layers/Plagi_cu_hemoragie_masiva_95.js"></script><script src="layers/Placenta_praevia_96.js"></script><script src="layers/Pancreatita_acuta_97.js"></script><script src="layers/Monotraumatisme_grave_98.js"></script><script src="layers/Metroragie_99.js"></script><script src="layers/Meningita_la_copii_100.js"></script><script src="layers/Membrane_rupte_101.js"></script><script src="layers/Melena_102.js"></script><script src="layers/Malformatii_congenitale_la_nounascut_cu_afectarea_functiilor_vitale_103.js"></script><script src="layers/Lipotimii_104.js"></script><script src="layers/Ischemia_acuta_periferica_105.js"></script><script src="layers/Intoxicatii_involuntare_106.js"></script><script src="layers/Intepatura_de_insecte_sau_muscatura_de_sarpe__cu_stare_gen_alterata_107.js"></script><script src="layers/Insuficienta_respiratorie_acuta_108.js"></script><script src="layers/Insuficienta_renala_acuta_109.js"></script><script src="layers/Infarct_miocardic_acut_110.js"></script><script src="layers/II_P_multipara_111.js"></script><script src="layers/Hipoxia_respiratorie_corp_strain_in_CRS_112.js"></script><script src="layers/Hipoxia_hipoxica_113.js"></script><script src="layers/Hipoxia_cardiaca_114.js"></script><script src="layers/Hipoxia_anemica_severa_hemoglobina_sub_7g_dL_115.js"></script><script src="layers/Hipovolemic_116.js"></script><script src="layers/Hemoragii_interne_exteriorizate__masive_cu_semne_de_soc_hipovolemic_117.js"></script><script src="layers/Hemoptizie_118.js"></script><script src="layers/Hematurie_119.js"></script><script src="layers/Hematemeza_120.js"></script><script src="layers/Fracturi_deschise_ale_membrelor_cu_afectarea_pachetului_vasculonervos_121.js"></script><script src="layers/Fibrilatie_tahicardie_ventriculara_fara_puls_122.js"></script><script src="layers/Febra_la_sugar_123.js"></script><script src="layers/Febra_la_nou_nascut_124.js"></script><script src="layers/Febra_la_copil_mic_125.js"></script><script src="layers/Epistaxis_126.js"></script><script src="layers/Encefalita_127.js"></script><script src="layers/Embolia_pulmonara_128.js"></script><script src="layers/Edem_pulmonar_acut_129.js"></script><script src="layers/Durere_toracica_anterioara_130.js"></script><script src="layers/Dispnee_131.js"></script><script src="layers/Disociatia_electromecanica_132.js"></script><script src="layers/Deshidratare_severa_133.js"></script><script src="layers/Cu_hemoragii_masive__trombocitopenii_134.js"></script><script src="layers/Cu_hemoragii_masive__hemofilii_135.js"></script><script src="layers/Cu_hemoragii_masive__epistaxis_136.js"></script><script src="layers/Criza_de_hipertensiune_cu_complicatii_137.js"></script><script src="layers/Cranio_cerebrale_138.js"></script><script src="layers/Convulsii_139.js"></script><script src="layers/Contractii_uterine_dureroase_140.js"></script><script src="layers/Come_141.js"></script><script src="layers/Colaps___soc_142.js"></script><script src="layers/Coagulopatii_cu_hemoragii_masive_143.js"></script><script src="layers/Cardiogen_144.js"></script><script src="layers/Bronhopneumonia_145.js"></script><script src="layers/Blocul_atrioventricular_de_gradul_3_146.js"></script><script src="layers/Avort_complicat_cu_infectie_sau_cu_soc_hemoragic_147.js"></script><script src="layers/Atac_de_glaucom_148.js"></script><script src="layers/Astmul_acut_grav_149.js"></script><script src="layers/Asistolia_150.js"></script><script src="layers/Arsuri_termice_de_grad_3_si_4_indiferent_de_suprafata_151.js"></script><script src="layers/Arsuri_termice_de_grad_1_si_2_mai_mari_de_10__din_suprafata_corporala_152.js"></script><script src="layers/Arsuri_termice_153.js"></script><script src="layers/Arsuri_chimice_154.js"></script><script src="layers/Angina_instabila_155.js"></script><script src="layers/Anafilactic_156.js"></script><script src="layers/Accidentul_cerebrovascular_acut_157.js"></script><script src="layers/Accidente_casnice_158.js"></script><script src="layers/Accidente_auto_159.js"></script><script src="layers/Accident_coronarian_acut_160.js"></script><script src="layers/Abdomen_acut_161.js"></script>
+        <script src="styles/Iasi_1_style.js"></script><script src="styles/Transportul_pacient_pentru_monitorizare_la_spital_in_urma_consult_ECU_2_style.js"></script><script src="styles/Transportul_medicului_dus_intors_pentru_constatare_deces_3_style.js"></script><script src="styles/Transportul_copiilor_dializati_4_style.js"></script><script src="styles/Transport_pacienti_internati_transferati_la_alt_spital_5_style.js"></script><script src="styles/Transport_pacient_cu_talasemie_majora_6_style.js"></script><script src="styles/Transport_la_spital_pentru_internare_sau_investigatii_nedeplasabili_7_style.js"></script><script src="styles/Transport_la_spital_pentru_internare_investigatii_a_pers_cu_insuf_motorie_a_trenului_inf_8_style.js"></script><script src="styles/Transport_la_sp_pt_internare__investigatii_la_insuf_cardiaca_cls_IV_NIHA_9_style.js"></script><script src="styles/Transport_de_sange_si_derivate_in_conditii_de_urgenta_10_style.js"></script><script src="styles/Transport_de_sange__derivate__tesuturi_si_organe_11_style.js"></script><script src="styles/T_12_style.js"></script><script src="styles/Internare_nou_nascut_si_lehuza_de_la_domiciliu_13_style.js"></script><script src="styles/Extern_nedepl_decont_de_CNAS__fract_membr_inf_ap_gipsat__deficit_neurog_grav__14_style.js"></script><script src="styles/Plecat_cu_alt_mijloc_de_transport_15_style.js"></script><script src="styles/Pacientul_refuza_consultatia_si_transportul_la_spital_16_style.js"></script><script src="styles/Negasite_Nu_s_a_gasit_adresa_Solicitantul_pacientul_17_style.js"></script><script src="styles/Gripa_cu_virus_neidentificat_18_style.js"></script><script src="styles/FALSE_19_style.js"></script><script src="styles/Anulate_20_style.js"></script><script src="styles/Altele_decat_cele_decontate_de_CASS__efectuate_contracost_spre_terti__21_style.js"></script><script src="styles/Tromboflebita_acuta_22_style.js"></script><script src="styles/Stare_febrila_cu_alterarea_starii_generale_23_style.js"></script><script src="styles/Sindromul_subocluziv_24_style.js"></script><script src="styles/Sindroame_de_compresie_si_sau_iritatie_radiculara_in_faza_acuta_25_style.js"></script><script src="styles/Reumatismul_articular_acut_in_criza_26_style.js"></script><script src="styles/Retentia_urinara_27_style.js"></script><script src="styles/Primipara_contractii_uterine_dureroase_sarcina_luna_VII_cu_CUD_28_style.js"></script><script src="styles/Politraumatisme_minore_29_style.js"></script><script src="styles/Nevralgia_cervico_brahiala_30_style.js"></script><script src="styles/Meningita_la_adulti__holera__difteria__tetanus__botulism__boala_renala_cu_stare_gen_alterata_31_style.js"></script><script src="styles/Meningita_la_adulti_32_style.js"></script><script src="styles/Luxatii_33_style.js"></script><script src="styles/Lombalgia__lombosciatica_34_style.js"></script><script src="styles/Ischemie_cerebrala_tranzitorie_35_style.js"></script><script src="styles/Insuficienta_cardiaca_decompensata_36_style.js"></script><script src="styles/In_puseu_inflamator_37_style.js"></script><script src="styles/Herniile_strangulate_fara_abdomen_acut_38_style.js"></script><script src="styles/Hemoragii_interne_exteriorizate__fara_semne_de_soc_hipovolemic_39_style.js"></script><script src="styles/Fracturi_inchise_ale_membrelor_si_fara_leziuni_ale_pachetului_vasculonervos_40_style.js"></script><script src="styles/Entorse_41_style.js"></script><script src="styles/Diabet_decompensat_42_style.js"></script><script src="styles/Cu_deficit_motor_al_membrelor_inferioare_43_style.js"></script><script src="styles/Criza_hipertensiune_arteriala_fara_complicatii_44_style.js"></script><script src="styles/Corpi_straini_in_nas_fara_dispnee_la_copii_45_style.js"></script><script src="styles/Corpi_straini_in_nas__faringe_si_intraauricular_46_style.js"></script><script src="styles/Corpi_straini_in_faringe__fara_dispnee_la_copii_47_style.js"></script><script src="styles/Corpi_straini_auricular_la_copii___3_ani_48_style.js"></script><script src="styles/Colica_renala_49_style.js"></script><script src="styles/Colica_biliara_50_style.js"></script><script src="styles/Colica_abdominala_51_style.js"></script><script src="styles/Colica_52_style.js"></script><script src="styles/Ciroza_hepatica_decompensata_53_style.js"></script><script src="styles/Boala_diuretica_cu_stare_generala_alterata_54_style.js"></script><script src="styles/Avort_necomplicat_55_style.js"></script><script src="styles/Artrite_septice_56_style.js"></script><script src="styles/Arterita__fara_sindrom_ischemie_periferica_acuta__cu_confirmare_oscilometrica_57_style.js"></script><script src="styles/Arsuri_termice_de_grad_1_2_sub_10__din_suprafata_corpului_care_fac_imposibila_deplasarea_58_style.js"></script><script src="styles/Apendicita_acuta_fara_abdomen_acut_59_style.js"></script><script src="styles/Anuria_60_style.js"></script><script src="styles/Angina_pectorala__in_afara_de_angina_instabila__61_style.js"></script><script src="styles/Agitatii_psihomotori_sau_catatonicii_62_style.js"></script><script src="styles/Afectiuni_reumatologice_63_style.js"></script><script src="styles/Tulburari_paroxistice_de_ritm_64_style.js"></script><script src="styles/Tulb_de_conducere_cu_afectarea_functiei_de_pompa_65_style.js"></script><script src="styles/Traumatismele_toracice_cu_pneumotorax_cu_presiune_sau_tamponada_66_style.js"></script><script src="styles/Traumatismele_gatului_cu_interesarea_cailor_aeriene_superioare_67_style.js"></script><script src="styles/Traumatisme_fractura_coloana_vertebrala_68_style.js"></script><script src="styles/Traumatisme_faciale_cu_interesarea_globului_ocular_69_style.js"></script><script src="styles/Traumatisme_faciale_cu_interesarea_cailor_aeriene_superioare_70_style.js"></script><script src="styles/Traumatisme_cu_abdomen_acut_si_sau_soc_hipovolemic_71_style.js"></script><script src="styles/Traumatisme_abdominale_cu_afectarea_organelor_abdominale_72_style.js"></script><script src="styles/Traumatic_73_style.js"></script><script src="styles/Toxico_septic_74_style.js"></script><script src="styles/Tentative_de_suicid_75_style.js"></script><script src="styles/T_76_style.js"></script><script src="styles/Supradoze_droguri_77_style.js"></script><script src="styles/Stop_cardiorespirator_78_style.js"></script><script src="styles/Starile_febrile_la_nounascut__sugar_si_copil_mic_79_style.js"></script><script src="styles/Stari_halucinante_delirante_80_style.js"></script><script src="styles/Stari_depresive_severe_81_style.js"></script><script src="styles/Stari_de_inconstienta_82_style.js"></script><script src="styles/Stari_confuzionale_83_style.js"></script><script src="styles/Stare_stuporoasa_84_style.js"></script><script src="styles/Solicitare_pt_cazuri_preluate_din_locuri_publice_85_style.js"></script><script src="styles/Socul_hipotermic_86_style.js"></script><script src="styles/Sindromul_de_coagulare_intravasculara_diseminata_87_style.js"></script><script src="styles/Sincope_88_style.js"></script><script src="styles/Septicemie_89_style.js"></script><script src="styles/Sarcina_L_VII_contractii_uterine_dureroase_90_style.js"></script><script src="styles/Sarcina_ectopica_rupta_91_style.js"></script><script src="styles/Rectoragie_92_style.js"></script><script src="styles/Politraumatisme___Accidente_auto_93_style.js"></script><script src="styles/Pleurezii_cu_lichid_masiv_94_style.js"></script><script src="styles/Plagi_cu_hemoragie_masiva_95_style.js"></script><script src="styles/Placenta_praevia_96_style.js"></script><script src="styles/Pancreatita_acuta_97_style.js"></script><script src="styles/Monotraumatisme_grave_98_style.js"></script><script src="styles/Metroragie_99_style.js"></script><script src="styles/Meningita_la_copii_100_style.js"></script><script src="styles/Membrane_rupte_101_style.js"></script><script src="styles/Melena_102_style.js"></script><script src="styles/Malformatii_congenitale_la_nounascut_cu_afectarea_functiilor_vitale_103_style.js"></script><script src="styles/Lipotimii_104_style.js"></script><script src="styles/Ischemia_acuta_periferica_105_style.js"></script><script src="styles/Intoxicatii_involuntare_106_style.js"></script><script src="styles/Intepatura_de_insecte_sau_muscatura_de_sarpe__cu_stare_gen_alterata_107_style.js"></script><script src="styles/Insuficienta_respiratorie_acuta_108_style.js"></script><script src="styles/Insuficienta_renala_acuta_109_style.js"></script><script src="styles/Infarct_miocardic_acut_110_style.js"></script><script src="styles/II_P_multipara_111_style.js"></script><script src="styles/Hipoxia_respiratorie_corp_strain_in_CRS_112_style.js"></script><script src="styles/Hipoxia_hipoxica_113_style.js"></script><script src="styles/Hipoxia_cardiaca_114_style.js"></script><script src="styles/Hipoxia_anemica_severa_hemoglobina_sub_7g_dL_115_style.js"></script><script src="styles/Hipovolemic_116_style.js"></script><script src="styles/Hemoragii_interne_exteriorizate__masive_cu_semne_de_soc_hipovolemic_117_style.js"></script><script src="styles/Hemoptizie_118_style.js"></script><script src="styles/Hematurie_119_style.js"></script><script src="styles/Hematemeza_120_style.js"></script><script src="styles/Fracturi_deschise_ale_membrelor_cu_afectarea_pachetului_vasculonervos_121_style.js"></script><script src="styles/Fibrilatie_tahicardie_ventriculara_fara_puls_122_style.js"></script><script src="styles/Febra_la_sugar_123_style.js"></script><script src="styles/Febra_la_nou_nascut_124_style.js"></script><script src="styles/Febra_la_copil_mic_125_style.js"></script><script src="styles/Epistaxis_126_style.js"></script><script src="styles/Encefalita_127_style.js"></script><script src="styles/Embolia_pulmonara_128_style.js"></script><script src="styles/Edem_pulmonar_acut_129_style.js"></script><script src="styles/Durere_toracica_anterioara_130_style.js"></script><script src="styles/Dispnee_131_style.js"></script><script src="styles/Disociatia_electromecanica_132_style.js"></script><script src="styles/Deshidratare_severa_133_style.js"></script><script src="styles/Cu_hemoragii_masive__trombocitopenii_134_style.js"></script><script src="styles/Cu_hemoragii_masive__hemofilii_135_style.js"></script><script src="styles/Cu_hemoragii_masive__epistaxis_136_style.js"></script><script src="styles/Criza_de_hipertensiune_cu_complicatii_137_style.js"></script><script src="styles/Cranio_cerebrale_138_style.js"></script><script src="styles/Convulsii_139_style.js"></script><script src="styles/Contractii_uterine_dureroase_140_style.js"></script><script src="styles/Come_141_style.js"></script><script src="styles/Colaps___soc_142_style.js"></script><script src="styles/Coagulopatii_cu_hemoragii_masive_143_style.js"></script><script src="styles/Cardiogen_144_style.js"></script><script src="styles/Bronhopneumonia_145_style.js"></script><script src="styles/Blocul_atrioventricular_de_gradul_3_146_style.js"></script><script src="styles/Avort_complicat_cu_infectie_sau_cu_soc_hemoragic_147_style.js"></script><script src="styles/Atac_de_glaucom_148_style.js"></script><script src="styles/Astmul_acut_grav_149_style.js"></script><script src="styles/Asistolia_150_style.js"></script><script src="styles/Arsuri_termice_de_grad_3_si_4_indiferent_de_suprafata_151_style.js"></script><script src="styles/Arsuri_termice_de_grad_1_si_2_mai_mari_de_10__din_suprafata_corporala_152_style.js"></script><script src="styles/Arsuri_termice_153_style.js"></script><script src="styles/Arsuri_chimice_154_style.js"></script><script src="styles/Angina_instabila_155_style.js"></script><script src="styles/Anafilactic_156_style.js"></script><script src="styles/Accidentul_cerebrovascular_acut_157_style.js"></script><script src="styles/Accidente_casnice_158_style.js"></script><script src="styles/Accidente_auto_159_style.js"></script><script src="styles/Accident_coronarian_acut_160_style.js"></script><script src="styles/Abdomen_acut_161_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script> 
+        <script src="./resources/Autolinker.min.js"></script>
+        <script src="./resources/qgis2web.js"></script>
+    </body>
+</html>
